@@ -61,31 +61,23 @@ fun LemonApp() {
     ) {
         when (currentStep) {
             1 -> {
-                // Display lemon tree image and ask user to pick a lemon from the tree
                 LemonTextAndImage(
                     textLabelResourceId = R.string.lemon_select,
                     drawableResourceId = R.drawable.lemon_tree,
                     contentDescriptionResourceId = R.string.lemon_tree_content_description,
                     onImageClick = {
-                        // Update to next step
                         currentStep = 2
-                        // Each time a lemon is picked from the tree, get a new random number
-                        // between 2 and 4 (inclusive) for the number of times the lemon needs
-                        // to be squeezed to turn into lemonade
                         squeezeCount = (2..4).random()
                     }
                 )
             }
             2 -> {
-                // Display lemon image and ask user to squeeze the lemon
                 LemonTextAndImage(
                     textLabelResourceId = R.string.lemon_squeeze,
                     drawableResourceId = R.drawable.lemon_squeeze,
                     contentDescriptionResourceId = R.string.lemon_content_description,
                     onImageClick = {
-                        // Decrease the squeeze count by 1 for each click the user performs
                         squeezeCount--
-                        // When we're done squeezing the lemon, move to the next step
                         if (squeezeCount == 0) {
                             currentStep = 3
                         }
@@ -93,25 +85,21 @@ fun LemonApp() {
                 )
             }
             3 -> {
-                // Display glass of lemonade image and ask user to drink the lemonade
                 LemonTextAndImage(
                     textLabelResourceId = R.string.lemon_drink,
                     drawableResourceId = R.drawable.lemon_drink,
                     contentDescriptionResourceId = R.string.lemonade_content_description,
                     onImageClick = {
-                        // Update to next step
                         currentStep = 4
                     }
                 )
             }
             4 -> {
-                // Display empty glass image and ask user to start again
                 LemonTextAndImage(
                     textLabelResourceId = R.string.lemon_empty_glass,
                     drawableResourceId = R.drawable.lemon_restart,
                     contentDescriptionResourceId = R.string.empty_glass_content_description,
                     onImageClick = {
-                        // Back to starting step
                         currentStep = 1
                     }
                 )
@@ -120,16 +108,6 @@ fun LemonApp() {
     }
 }
 
-/**
- * Composable that displays a text label above an image that is clickable.
- *
- * @param textLabelResourceId is the resource ID for the text string to display
- * @param drawableResourceId is the resource ID for the image drawable to display below the text
- * @param contentDescriptionResourceId is the resource ID for the string to use as the content
- * description for the image
- * @param onImageClick will be called when the user clicks the image
- * @param modifier modifiers to set to this composable
- */
 @Composable
 fun LemonTextAndImage(
     textLabelResourceId: Int,
